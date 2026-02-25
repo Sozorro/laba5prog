@@ -1,7 +1,8 @@
 package com;
 
 public interface Command {
-    public void execute();
+    //private String name;
+    public void execute(String... args);
 }
 /*
 Нужные команды:

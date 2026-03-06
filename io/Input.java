@@ -4,8 +4,8 @@ import java.util.Scanner;
 import manager.ComParser;
 
 public class Input {
-    private ComParser comParser = new ComParser();
-    public void start() {
+    private static ComParser comParser = new ComParser();
+    public static void start() {
         Scanner scan = new Scanner(System.in);
         while (true) {
             String s = scan.nextLine();

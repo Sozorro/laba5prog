@@ -1,8 +1,10 @@
-package manager;
+package managers;
 
 import java.util.TreeSet;
 
-public class Collect {
+import builders.LabWork;
+
+public class CollectionManager {
     private TreeSet<LabWork> labwork = new TreeSet<>();
     
     /*

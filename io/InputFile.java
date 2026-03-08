@@ -1,17 +1,26 @@
 package io;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import manager.CollectionManager;
 import manager.ComParser;
 
 public class InputFile {
-    private ComParser comParser = new ComParser();
-    public void start() {
-        Scanner scan = new Scanner(System.in);
-        while (true) {
-            String s = scan.nextLine();
-            String[] command = s.split(" ", 2);
-            comParser.interpret(command[0], command[1]);
+    private static ComParser comParser;
+    public static void start(File myFile, CollectionManager collectionManager) {
+        try {
+            comParser = new ComParser(collectionManager);
+            Scanner scanner = new Scanner(myFile);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                System.out.println(line);
+            }
+            scanner.close();
+        } 
+        catch (FileNotFoundException e) {
+            //throw new WrongParam("Данный файл не найден");
         }
     }
     /*
@@ -24,5 +33,7 @@ public class InputFile {
     Все классы в программе должны быть задокументированы в формате javadoc.
     Программа должна корректно работать с неправильными данными (ошибки пользовательского ввода, отсутсвие прав доступа к файлу и т.п.).
     
+    Чтение данных из файла необходимо реализовать с помощью класса java.io.InputStreamReader
+    Запись данных в файл необходимо реализовать с помощью класса java.io.OutputStreamWriter
     */
 }

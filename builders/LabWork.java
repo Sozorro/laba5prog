@@ -1,7 +1,7 @@
 package builders;
 
 import enums.Difficulty;
-import manager.Coordinates;
+import managers.Coordinates;
 
 public class LabWork {
     //объекты коллекции

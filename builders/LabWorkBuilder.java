@@ -1,9 +1,8 @@
 package builders;
 
-import java.util.Scanner;
-
 import enums.Difficulty;
-import manager.Coordinates;
+import io.Input;
+import managers.Coordinates;
 
 public class LabWorkBuilder extends Builder {
     public LabWork makeLabWork() {
@@ -26,22 +25,25 @@ public class LabWorkBuilder extends Builder {
 
     private Coordinates makeCoordinates(String s) {
         // вывод текста и получение Coordinates
-        Coordinates str;
         System.out.println(s);
-        return str;
+        String str = Input.scannerNow.nextLine();
+        String[] coords = str.split(" ", 2);
+        Coordinates coord = new Coordinates(Float.valueOf(coords[0]), Float.valueOf(coords[1]));
+        return coord;
     }
     private Difficulty makeDifficulty(String s) {
         // вывод текста и получение Difficulty
-        Difficulty str = Difficulty.HARD;
         System.out.println(s);
-        return str;
+        String str = Input.scannerNow.nextLine();
+        Difficulty difficulty = Difficulty.valueOf(str);
+        return difficulty;
     }
     private Person makePerson(String s) {
-        PersonBuilder personBuilder = new PersonBuilder();
         // вывод текста и получение Person
-        Person str = personBuilder.makePerson();
         System.out.println(s);
-        return str;
+        PersonBuilder personBuilder = new PersonBuilder();
+        Person person = personBuilder.makePerson();
+        return person;
     }
 
 }

@@ -2,16 +2,17 @@ package io;
 
 import java.util.Scanner;
 
-import manager.CollectionManager;
-import manager.ComParser;
+import managers.CollectionManager;
+import managers.ComParser;
 
 public class Input {
     private static ComParser comParser;
+    public static Scanner scannerNow;
     public static void start(CollectionManager collectionManager) {
         comParser = new ComParser(collectionManager);
-        Scanner scan = new Scanner(System.in);
+        scannerNow = new Scanner(System.in);
         while (true) {
-            String s = scan.nextLine();
+            String s = scannerNow.nextLine();
             String[] command = s.split(" ", 2);
             comParser.interpret(command[0], command[1]);
         }

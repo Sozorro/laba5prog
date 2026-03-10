@@ -6,8 +6,11 @@ import io.Input;
 import managers.Coordinates;
 
 public class LabWorkBuilder extends Builder {
+    private static long idCounter = 1;
+    
     public LabWork makeLabWork() {
         return new LabWork(
+            new java.util.Date(),
             makeString("Введите название работы"), 
             makeCoordinates("coordinates"), 
             makeInt("minimalPoint"), 
@@ -20,8 +23,7 @@ public class LabWorkBuilder extends Builder {
 
     public LabWork makeLabWork(String name, Coordinates coordinates, int minimalPoint, int personalQualitiesMinimum,
         String description, Difficulty difficulty, Person author) {
-
-        return new LabWork(name, coordinates, minimalPoint, personalQualitiesMinimum, description, difficulty, author);
+        return new LabWork(new java.util.Date(), name, coordinates, minimalPoint, personalQualitiesMinimum, description, difficulty, author);
     }
 
     private Coordinates makeCoordinates(String s) {
@@ -49,6 +51,13 @@ public class LabWorkBuilder extends Builder {
         PersonBuilder personBuilder = new PersonBuilder();
         Person person = personBuilder.makePerson();
         return person;
+    }
+
+    public static long getIdCounter() {
+        return idCounter;
+    }
+    public static void setIdCounter(long id) {
+        idCounter = id;
     }
 
 }

@@ -5,7 +5,6 @@ import managers.Coordinates;
 
 public class LabWork {
     //объекты коллекции
-    private static long idCounter = 1;
 
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -17,11 +16,10 @@ public class LabWork {
     private Difficulty difficulty; //Поле может быть null
     private Person author; //Поле может быть 
     
-    LabWork (String name, Coordinates coordinates, int minimalPoint, int personalQualitiesMinimum,
+    LabWork (java.util.Date date, String name, Coordinates coordinates, int minimalPoint, int personalQualitiesMinimum,
         String description, Difficulty difficulty, Person author) {
-        id = Long.valueOf(idCounter);
-        idCounter++;
-        this.creationDate = new java.util.Date();
+        
+        this.creationDate = date;
 
         this.name = name;
         this.coordinates = coordinates;
@@ -30,5 +28,11 @@ public class LabWork {
         this.description = description;
         this.difficulty = difficulty;
         this.author = author;
+    }
+    public void setId(Long idCounter) {
+        this.id = idCounter;
+    }
+    public Long getId() {
+        return id;
     }
 }

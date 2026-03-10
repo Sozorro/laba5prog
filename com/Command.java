@@ -1,8 +1,24 @@
 package com;
 
-public interface Command {
-    //private String name;
-    public void execute(String... args);
+import manager.CollectionManeger;
+
+public abstract class Command {
+    public String name;
+    public String description;
+    private CollectionManeger collectionManeger;
+
+    Command(CollectionManeger collectionManeger) {
+        this.collectionManeger = collectionManeger;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public abstract void execute(String... args);
 }
 /*
 Нужные команды:

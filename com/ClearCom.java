@@ -1,8 +1,13 @@
 package com;
 
-public class ClearCom implements Command {
+import managers.CollectionManager;
+
+public class ClearCom extends Command {
+    public ClearCom(CollectionManager collectionManager) {
+        super(collectionManager);
+    }
     @Override
     public void execute(String... args) {
-
+        collectionManager.delLabs();
     }
 }

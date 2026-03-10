@@ -1,14 +1,14 @@
 package com;
 
-import manager.CollectionManeger;
+import managers.CollectionManager;
 
 public abstract class Command {
     public String name;
     public String description;
-    private CollectionManeger collectionManeger;
+    protected CollectionManager collectionManager;
 
-    Command(CollectionManeger collectionManeger) {
-        this.collectionManeger = collectionManeger;
+    Command(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
     }
 
     public String getName() {

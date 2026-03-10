@@ -17,4 +17,9 @@ public class Input {
             comParser.interpret(command[0], command[1]);
         }
     }
+    public static String getParams(String s){ 
+        System.out.println(s);
+        String str = scannerNow.nextLine();
+        return str;
+    }
 }

@@ -1,6 +1,7 @@
 package builders;
 
 import enums.Color;
+import exeptions.WrongParam;
 import io.Input;
 
 public class PersonBuilder extends Builder {
@@ -9,8 +10,10 @@ public class PersonBuilder extends Builder {
     }
     private Color makeColor(String s) {
         // вывод текста и получение Color
-        System.out.println(s);
-        String str = Input.scannerNow.nextLine();
+        String str = Input.getParams(s);
+        if(str == null){
+            throw new WrongParam();
+        }
         Color color = Color.valueOf(str);
         return color;
     }

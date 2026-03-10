@@ -1,6 +1,7 @@
 package builders;
 
 import enums.Difficulty;
+import exeptions.WrongParam;
 import io.Input;
 import managers.Coordinates;
 
@@ -25,16 +26,20 @@ public class LabWorkBuilder extends Builder {
 
     private Coordinates makeCoordinates(String s) {
         // вывод текста и получение Coordinates
-        System.out.println(s);
-        String str = Input.scannerNow.nextLine();
+        String str = Input.getParams(s);
+        if(str == null){
+            throw new WrongParam();
+        } 
         String[] coords = str.split(" ", 2);
         Coordinates coord = new Coordinates(Float.valueOf(coords[0]), Float.valueOf(coords[1]));
         return coord;
     }
     private Difficulty makeDifficulty(String s) {
         // вывод текста и получение Difficulty
-        System.out.println(s);
-        String str = Input.scannerNow.nextLine();
+        String str = Input.getParams(s);
+        if(str == null){
+            throw new WrongParam();
+        }        
         Difficulty difficulty = Difficulty.valueOf(str);
         return difficulty;
     }

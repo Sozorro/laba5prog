@@ -29,6 +29,7 @@ public class LabWork {
         this.difficulty = difficulty;
         this.author = author;
     }
+    
     public void setId(Long idCounter) {
         this.id = idCounter;
     }

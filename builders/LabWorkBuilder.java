@@ -3,6 +3,7 @@ package builders;
 import enums.Difficulty;
 import exeptions.WrongParam;
 import io.Input;
+import io.InputFile;
 import managers.Coordinates;
 
 public class LabWorkBuilder extends Builder {
@@ -19,6 +20,19 @@ public class LabWorkBuilder extends Builder {
             makeDifficulty("difficulty"), 
             makePerson("author")
         );
+    }
+    public LabWork makeLabWork(java.util.Date date, String name, Coordinates coordinates, int minimalPoint, int personalQualitiesMinimum,
+        String description, Difficulty difficulty, Person author) {
+        return new LabWork(
+            date, 
+            name, 
+            coordinates, 
+            minimalPoint, 
+            personalQualitiesMinimum,
+            description, 
+            difficulty, 
+            author
+        );        
     }
 
     public LabWork makeLabWork(String name, Coordinates coordinates, int minimalPoint, int personalQualitiesMinimum,

@@ -7,6 +7,8 @@ import java.util.TreeSet;
 
 import builders.LabWork;
 import builders.LabWorkBuilder;
+import builders.Person;
+import exeptions.WrongParam;
 
 public class CollectionManager {
     private TreeSet<LabWork> labwork = new TreeSet<>(new idComparator());
@@ -25,6 +27,9 @@ public class CollectionManager {
     }
     public void delLab(long id) {
         LabWork delLaba = findElem(id);
+        if(delLaba == null) {
+            throw new WrongParam();
+        }
         Iterator<LabWork> iterator = labwork.tailSet(delLaba, false).iterator();
         labwork.remove(delLaba);
         while (iterator.hasNext()) {
@@ -56,6 +61,28 @@ public class CollectionManager {
                 return laba;
         }
         return null;
+    }
+    public ArrayList<LabWork> findElems(Person author) {
+        ArrayList<LabWork> labs = new ArrayList<LabWork>();
+        Iterator<LabWork> iterator = labwork.iterator();
+        while(iterator.hasNext()) {
+            LabWork laba = iterator.next();
+            if(laba.getAuthor().getWeight() > author.getWeight())             
+                labs.add(laba);
+        }
+        return labs;
+    }
+
+    public ArrayList<LabWork> findElems(String... prefDescription) {
+        ArrayList<LabWork> labs = new ArrayList<LabWork>();
+        Iterator<LabWork> iterator = labwork.iterator();
+        while(iterator.hasNext()) {
+            LabWork laba = iterator.next();
+            if(laba.getDescription().startsWith(String.join(" ", prefDescription))){
+                labs.add(laba);
+            }          
+        }
+        return labs;
     }
 
     /*

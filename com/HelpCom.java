@@ -10,6 +10,8 @@ import managers.ComParser;
 public class HelpCom extends Command {
     public HelpCom(CollectionManager collectionManager) {
         super(collectionManager);
+        this.name = "help";
+        this.description = "добавить элемент LabWork";
     }
     @Override
     public void execute(String... args) {

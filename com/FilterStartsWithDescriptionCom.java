@@ -6,6 +6,8 @@ import managers.CollectionManager;
 public class FilterStartsWithDescriptionCom extends Command {
     public FilterStartsWithDescriptionCom(CollectionManager collectionManager) {
         super(collectionManager);
+        this.name = "filter";
+        this.description = "добавить элемент LabWork";
     }
     @Override
     public void execute(String... args) {

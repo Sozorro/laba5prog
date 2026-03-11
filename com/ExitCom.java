@@ -5,6 +5,8 @@ import managers.CollectionManager;
 public class ExitCom extends Command {
     public ExitCom(CollectionManager collectionManager) {
         super(collectionManager);
+        this.name = "exit";
+        this.description = "добавить элемент LabWork";
     }
     @Override
     public void execute(String... args) {

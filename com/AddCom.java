@@ -7,6 +7,8 @@ import managers.CollectionManager;
 public class AddCom extends Command {
     public AddCom(CollectionManager collectionManager) {
         super(collectionManager);
+        this.name = "add";
+        this.description = "добавить элемент LabWork";
     }
     @Override
     public void execute(String... args){

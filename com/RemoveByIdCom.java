@@ -6,6 +6,8 @@ import managers.CollectionManager;
 public class RemoveByIdCom extends Command {
     public RemoveByIdCom(CollectionManager collectionManager) {
         super(collectionManager);
+        this.name = "remove";
+        this.description = "добавить элемент LabWork";
     }
     @Override
     public void execute(String... args) {

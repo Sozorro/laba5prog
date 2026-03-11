@@ -1,5 +1,6 @@
 package com;
 
+import java.text.ParseException;
 import builders.LabWorkBuilder;
 import managers.CollectionManager;
 
@@ -9,9 +10,14 @@ public class AddCom extends Command {
     }
     @Override
     public void execute(String... args){
-        if(args == null) {
-            LabWorkBuilder labWorkBuilder = new LabWorkBuilder();
-            collectionManager.addLab(labWorkBuilder.makeLabWork());
+        try { 
+            if(args == null) {
+                LabWorkBuilder labWorkBuilder = new LabWorkBuilder();
+                collectionManager.addLab(labWorkBuilder.makeLabWork());
+                System.out.println("элемент добавлен");
+            }
+        } catch (ParseException e) {
+            System.out.println("Ошибка парсинга");
         }
         
     }

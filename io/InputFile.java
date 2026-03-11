@@ -19,6 +19,7 @@ public class InputFile {
     private static String[] command;
 
     public static void start(File myFile, CollectionManager collectionManager) {
+        readFile = true;
         try (InputStreamReader file = new InputStreamReader(new FileInputStream(myFile))) {
             comParser = new ComParser(collectionManager);
             int c = file.read();
@@ -43,6 +44,7 @@ public class InputFile {
             //throw new WrongParam("Данный файл не найден");
         } catch (IOException e) {       
         } 
+        readFile = false;
     }
     public static String getParams(String... s){
         if(s[0] == "Id") {

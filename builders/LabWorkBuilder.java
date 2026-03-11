@@ -1,5 +1,9 @@
 package builders;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import enums.Color;
 import enums.Difficulty;
 import exeptions.WrongParam;
 import io.Input;
@@ -9,17 +13,39 @@ import managers.Coordinates;
 public class LabWorkBuilder extends Builder {
     private static long idCounter = 1;
     
-    public LabWork makeLabWork() {
-        return new LabWork(
-            new java.util.Date(),
-            makeString("Введите название работы"), 
-            makeCoordinates("coordinates"), 
-            makeInt("minimalPoint"), 
-            makeInt("personalQualitiesMinimum"),
-            makeString("description"), 
-            makeDifficulty("difficulty"), 
-            makePerson("author")
-        );
+    public LabWork makeLabWork() throws ParseException {
+        if (InputFile.readFile == false) {
+            return new LabWork(
+                new java.util.Date(),
+                makeString("Введите название работы"), 
+                makeCoordinates("coordinates"), 
+                makeInt("minimalPoint"), 
+                makeInt("personalQualitiesMinimum"),
+                makeString("description"), 
+                makeDifficulty("difficulty"), 
+                makePerson("author")
+            );
+        }
+        else {
+            PersonBuilder personBuilder = new PersonBuilder();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+            return makeLabWork(
+                formatter.parse(InputFile.getParams("Labwork", "date")), 
+                InputFile.getParams("Labwork", "name"), 
+                new Coordinates(Float.valueOf(InputFile.getParams("Labwork", "coordinatesX")), Float.valueOf(InputFile.getParams("Labwork", "coordinatesY"))), 
+                Integer.valueOf(InputFile.getParams("Labwork", "minimalPoint")),
+                Integer.valueOf(InputFile.getParams("Labwork", "personalQualitiesMinimum")),
+                InputFile.getParams("Labwork", "description"), 
+                Difficulty.valueOf(InputFile.getParams("Labwork", "difficulty")), 
+                    personBuilder.makePerson(
+                        InputFile.getParams("Labwork", "Person", "name"), 
+                        Double.valueOf(InputFile.getParams("Labwork", "Person", "height")), 
+                        Long.valueOf(InputFile.getParams("Labwork", "Person", "weight")), 
+                        InputFile.getParams("Labwork", "Person", "passportID"), 
+                        Color.valueOf(InputFile.getParams("Labwork", "Person", "hairColor"))
+                    )
+            );
+        }
     }
     public LabWork makeLabWork(java.util.Date date, String name, Coordinates coordinates, int minimalPoint, int personalQualitiesMinimum,
         String description, Difficulty difficulty, Person author) {

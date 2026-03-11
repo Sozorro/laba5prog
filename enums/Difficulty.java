@@ -1,7 +1,27 @@
 package enums;
 
+import exeptions.WrongParam;
+
 public enum Difficulty {
-    HARD,
-    VERY_HARD,
-    INSANE;
+    HARD(1),
+    VERY_HARD(2),
+    INSANE(3);
+
+    private final int num;
+
+    Difficulty(int num) {
+        this.num = num;
+    }
+
+    public int getNum() {
+        return num;
+    }
+    public static Difficulty getDif(int num) throws WrongParam{
+        for (Difficulty dif : values()) {
+            if (dif.getNum() == num) {
+                return dif;
+            }
+        }
+        throw new WrongParam("Некорректное значение: ");
+    }
 }

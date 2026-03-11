@@ -35,4 +35,49 @@ public class LabWork {
     public Long getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public java.util.Date getCreationDate() {
+        return creationDate;
+    }
+
+    public int getMinimalPoint() {
+        return minimalPoint;
+    }
+
+    public int getPersonalQualitiesMinimum() {
+        return personalQualitiesMinimum;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public Person getAuthor() {
+        return author;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + "\n" +
+            "Name: " + name + "\n" +
+            "Coordinates: " + coordinates.toString() + "\n" +
+            "Creation Date: " + creationDate.toString() + "\n" +
+            "Minimal Point: " + minimalPoint + "\n" +
+            "Personal Qualities Minimum: " + personalQualitiesMinimum + "\n" +
+            "Description: " + description + "\n" +
+            "Difficulty: " + difficulty.toString() + "\n" +
+            "Author: " + author.toString();
+    }
 }

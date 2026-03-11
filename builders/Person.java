@@ -16,4 +16,33 @@ public class Person {
         this.passportID = passportID;
         this.hairColor = hairColor;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public long getWeight() {
+        return weight;
+    }
+
+    public String getPassportID() {
+        return passportID;
+    }
+
+    public Color getHairColor() {
+        return hairColor;
+}
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\n" +
+            "Height: " + height + "\n" +
+            "Weight: " + weight + "\n" +
+            "Passport ID: " + passportID + "\n" +
+            "Hair Color: " + hairColor.toString();
+    }
 }

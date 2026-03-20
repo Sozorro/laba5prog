@@ -6,22 +6,22 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 import builders.LabWork;
-import builders.LabWorkBuilder;
 import builders.Person;
 import exeptions.WrongParam;
 
 public class CollectionManager {
     private TreeSet<LabWork> labwork = new TreeSet<>(new idComparator());
+    private static long idCounter = 1;
     
     public void addLab(LabWork labWork) {
-        labWork.setId(Long.valueOf(LabWorkBuilder.getIdCounter()));
-        LabWorkBuilder.setIdCounter(LabWorkBuilder.getIdCounter() + 1);
+        labWork.setId(Long.valueOf(idCounter));
+        idCounter++;
         this.labwork.add(labWork);
     }
     public void addLabs(ArrayList<LabWork> labWorks) {
         for(var laba : labWorks) {
-            laba.setId(Long.valueOf(LabWorkBuilder.getIdCounter()));
-            LabWorkBuilder.setIdCounter(LabWorkBuilder.getIdCounter() + 1);
+            laba.setId(Long.valueOf(idCounter));
+            idCounter++;
             this.labwork.add(laba);
         }
     }
@@ -38,12 +38,12 @@ public class CollectionManager {
             laba.setId(laba.getId() - 1);
             labwork.add(laba);
         }
-        LabWorkBuilder.setIdCounter(LabWorkBuilder.getIdCounter() - 1);
+        idCounter--;
     }
 
     public void delLabs() {
         labwork.clear();
-        LabWorkBuilder.setIdCounter(0);
+        idCounter = 0;
     }
 
     class idComparator implements Comparator<LabWork> {
@@ -83,6 +83,13 @@ public class CollectionManager {
             }          
         }
         return labs;
+    }
+
+    public static long getIdCounter() {
+        return idCounter;
+    }
+    public static void setIdCounter(long id) {
+        idCounter = id;
     }
 
     /*

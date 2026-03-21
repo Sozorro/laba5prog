@@ -8,7 +8,7 @@ import io.Input;
 public class PersonBuilder extends Builder {
     public Person makePerson() {
         try {
-            return new Person (makeString("name"), makeDouble("height"), makeLong("weight"), makeString("passportID"), makeColor("hairColor"));
+            return new Person (getStandartValue("name", String.class), getStandartValue("height", Double.class), getStandartValue("weight", Long.class), getStandartValue("passportID", String.class), makeColor("hairColor"));
         } catch (WrongParam e) {
             return makePerson();
         }

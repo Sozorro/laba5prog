@@ -18,11 +18,11 @@ public class LabWorkBuilder extends Builder {
             try {
                 return new LabWork(
                     new java.util.Date(),
-                    makeString("Введите название работы: "), 
+                    getStandartValue("Введите название работы: ", String.class), 
                     makeCoordinates("Введите координаты х и у (в одну строку через пробел или на одной сначала x, затем на другой у): "), 
-                    makeInt("Введите minimalPoint: "), 
-                    makeInt("Введите personalQualitiesMinimum: "),
-                    makeString("Укажите описание вашей работы: "), 
+                    getStandartValue("Введите minimalPoint: ", Integer.class), 
+                    getStandartValue("Введите personalQualitiesMinimum: ", Integer.class),
+                    getStandartValue("Укажите описание вашей работы: ", String.class), 
                     makeDifficulty("Введите сложность работы или выберете цифру: "), 
                     makePerson("Введите author")
                 );

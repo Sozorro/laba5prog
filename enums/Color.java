@@ -17,7 +17,7 @@ public enum Color {
     public int getNum() {
         return num;
     }
-    public static Color getColor(int num) throws WrongParam{
+    public static Color getVal(int num) throws WrongParam{
         for (Color col : values()) {
             if (col.getNum() == num) {
                 return col;

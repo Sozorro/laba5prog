@@ -16,7 +16,7 @@ public enum Difficulty {
     public int getNum() {
         return num;
     }
-    public static Difficulty getDif(int num) throws WrongParam{
+    public static Difficulty getVal(int num) throws WrongParam{
         for (Difficulty dif : values()) {
             if (dif.getNum() == num) {
                 return dif;

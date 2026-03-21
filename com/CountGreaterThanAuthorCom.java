@@ -2,7 +2,7 @@ package com;
 
 import builders.Person;
 import builders.PersonBuilder;
-import exeptions.WrongParam;
+import exceptions.WrongParam;
 import managers.CollectionManager;
 
 public class CountGreaterThanAuthorCom extends Command {

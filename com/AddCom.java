@@ -1,7 +1,12 @@
 package com;
 
 import java.text.ParseException;
+
+import builders.LabWork;
 import builders.LabWorkBuilder;
+import exceptions.WrongAction;
+import exceptions.WrongParam;
+import io.Input;
 import managers.CollectionManager;
 
 public class AddCom extends Command {
@@ -13,13 +18,17 @@ public class AddCom extends Command {
     @Override
     public void execute(String... args){
         try { 
-            if(args == null) {
-                LabWorkBuilder labWorkBuilder = new LabWorkBuilder();
-                collectionManager.addLab(labWorkBuilder.makeLabWork());
-                System.out.println("элемент добавлен");
-            }
+            LabWorkBuilder labWorkBuilder = new LabWorkBuilder();
+            LabWork laba = labWorkBuilder.makeLabWork();
+            if(laba == null) return;
+            collectionManager.addLab(laba);
+            System.out.println("элемент добавлен");
         } catch (ParseException e) {
-            System.out.println("Ошибка парсинга");
+            System.out.println("Ошибка парсинга, элемент не был добавлен");
+        } catch (WrongParam e) {
+            System.out.println("Элемент не был добавлен");
+        } catch (WrongAction e) {
+            System.out.println("Создание элемента было остановлено и он не был добавлен в коллекцию");
         }
         
     }

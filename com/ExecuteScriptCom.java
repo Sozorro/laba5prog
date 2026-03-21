@@ -2,7 +2,7 @@ package com;
 
 import java.io.File;
 
-import exeptions.WrongParam;
+import exceptions.WrongParam;
 import io.InputFile;
 import managers.CollectionManager;
 

@@ -1,6 +1,6 @@
 package com;
 
-import exeptions.WrongParam;
+import exceptions.WrongParam;
 import managers.CollectionManager;
 
 public class FilterStartsWithDescriptionCom extends Command {

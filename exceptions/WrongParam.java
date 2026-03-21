@@ -1,18 +1,18 @@
-package exeptions;
+package exceptions;
 
-public class WrongAction extends RuntimeException {
+public class WrongParam extends RuntimeException {
     private String message;
-    public WrongAction() {
+    public WrongParam() {
         super();
     }
-    public WrongAction(String message) {
+    public WrongParam(String message) {
         super(message);
         this.message = message;
     }
     @Override
     public String getMessage(){
         if (message == "")
-        return "Откакт действия";
+        return "Incorrect value";
         return message;
     }
 }

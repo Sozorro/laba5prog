@@ -1,8 +1,8 @@
 package builders;
 
 import enums.Color;
-import exeptions.WrongAction;
-import exeptions.WrongParam;
+import exceptions.WrongAction;
+import exceptions.WrongParam;
 import io.Input;
 
 public class PersonBuilder extends Builder {

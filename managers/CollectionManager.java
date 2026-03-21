@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 import builders.LabWork;
 import builders.Person;
-import exeptions.WrongParam;
+import exceptions.WrongParam;
 
 public class CollectionManager {
     private TreeSet<LabWork> labwork = new TreeSet<>(new idComparator());

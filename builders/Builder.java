@@ -1,7 +1,7 @@
 package builders;
 
-import exeptions.WrongAction;
-import exeptions.WrongParam;
+import exceptions.WrongAction;
+import exceptions.WrongParam;
 import io.Input;
 
 public class Builder {

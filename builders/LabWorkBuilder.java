@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 
 import enums.Color;
 import enums.Difficulty;
-import exeptions.WrongAction;
-import exeptions.WrongParam;
+import exceptions.WrongAction;
+import exceptions.WrongParam;
 import io.Input;
 import io.InputFile;
 import managers.Coordinates;

@@ -1,6 +1,6 @@
 package enums;
 
-import exeptions.WrongParam;
+import exceptions.WrongParam;
 
 public enum Difficulty {
     HARD(1),

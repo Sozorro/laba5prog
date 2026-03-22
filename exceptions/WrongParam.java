@@ -1,7 +1,7 @@
 package exceptions;
 
 public class WrongParam extends RuntimeException {
-    private String message;
+    private String message = "";
     public WrongParam() {
         super();
     }

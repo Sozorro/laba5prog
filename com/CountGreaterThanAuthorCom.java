@@ -27,9 +27,11 @@ public class CountGreaterThanAuthorCom extends Command {
             PersonBuilder personBuilder = new PersonBuilder();
             Person author = personBuilder.makePerson("", 0.0, Long.valueOf(str[0]), "", Color.WHITE);
             ComHistory.addCom(name, str[0]);
-            System.out.println("Кол-во элементов, вес которых больше, чем " + str[0] + ": " + collectionManager.findElems(author).size());
+            System.out.println("Кол-во элементов, вес которых больше, чем " + str[0] + ": " + collectionManager.findElemsHeavierPerson(author).size());
+        } catch (NumberFormatException e) {
+            System.out.println("Неверный формат веса");
         } catch (WrongParam e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"yes\" \n \tИначе введите: \"no\" \n \t");
             if(prov != null && prov.equals("yes")) {
                 execute();

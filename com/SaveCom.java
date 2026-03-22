@@ -6,7 +6,7 @@ public class SaveCom extends Command {
     public SaveCom(CollectionManager collectionManager) {
         super(collectionManager);
         this.name = "save";
-        this.description = "добавить элемент LabWork";
+        this.description = "сохранить коллекцию в файл";
     }
     @Override
     public void execute(String... args) {

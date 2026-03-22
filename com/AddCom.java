@@ -23,7 +23,6 @@ public class AddCom extends Command {
             if(laba == null) return;
             collectionManager.addLab(laba);
             ComHistory.addCom(name, laba.toString());
-            System.out.println("Элемент добавлен");
         } catch (ParseException e) {
             System.out.println("Ошибка парсинга, элемент не был добавлен");
         } catch (WrongParam e) {

@@ -6,14 +6,14 @@ import builders.LabWork;
 import builders.LabWorkBuilder;
 import exceptions.WrongAction;
 import exceptions.WrongParam;
-import io.Input;
 import managers.CollectionManager;
+import managers.ComHistory;
 
 public class AddCom extends Command {
     public AddCom(CollectionManager collectionManager) {
         super(collectionManager);
         this.name = "add";
-        this.description = "добавить элемент LabWork";
+        this.description = "Добавить элемент LabWork в коллекцию";
     }
     @Override
     public void execute(String... args){
@@ -22,7 +22,8 @@ public class AddCom extends Command {
             LabWork laba = labWorkBuilder.makeLabWork();
             if(laba == null) return;
             collectionManager.addLab(laba);
-            System.out.println("элемент добавлен");
+            ComHistory.addCom(name, laba.toString());
+            System.out.println("Элемент добавлен");
         } catch (ParseException e) {
             System.out.println("Ошибка парсинга, элемент не был добавлен");
         } catch (WrongParam e) {
@@ -30,7 +31,6 @@ public class AddCom extends Command {
         } catch (WrongAction e) {
             System.out.println("Создание элемента было остановлено и он не был добавлен в коллекцию");
         }
-        
     }
     /*передача параметров через конструкторы? */
 }

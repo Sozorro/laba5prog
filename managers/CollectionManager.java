@@ -41,9 +41,11 @@ public class CollectionManager {
         idCounter--;
     }
 
-    public void delLabs() {
+    public long delLabs() {
+        long i = idCounter - 1;
         labwork.clear();
-        idCounter = 0;
+        idCounter = 1;
+        return i;
     }
 
     class idComparator implements Comparator<LabWork> {

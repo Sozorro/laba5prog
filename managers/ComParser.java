@@ -8,7 +8,7 @@ public class ComParser {
     public ComParser(CollectionManager collectionManager) {
         commands.put("add", new AddCom(collectionManager));
         commands.put("clear", new ClearCom(collectionManager));
-        commands.put("countGreaterThanAuthor", new CountGreaterThanAuthorCom(collectionManager));
+        commands.put("counterByWeight", new CountGreaterThanAuthorCom(collectionManager));
         commands.put("executeScript", new ExecuteScriptCom(collectionManager));
         commands.put("exit", new ExitCom(collectionManager));
         commands.put("filterStartsWithDescription", new FilterStartsWithDescriptionCom(collectionManager));

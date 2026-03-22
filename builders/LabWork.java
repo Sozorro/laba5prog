@@ -79,6 +79,14 @@ public class LabWork {
             "Personal Qualities Minimum: " + personalQualitiesMinimum + "\n" +
             "Description: " + description + "\n" +
             "Difficulty: " + difficulty.toString() + "\n" +
-            "Author: " + author.toString();
+            "Author: \n" + getPersonString(author);
     }
+    public String getPersonString(Person person) {
+    String[] s = person.toString().split("\n");
+    StringBuilder sb = new StringBuilder();
+    for (String line : s) {
+        sb.append("\t").append(line).append("\n");
+    }
+    return sb.toString();
+}
 }

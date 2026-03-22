@@ -71,7 +71,7 @@ public class LabWork {
 
     @Override
     public String toString() {
-        return "ID: " + id + "\n" +
+        return "Объект LabWork:\nID: " + id + "\n" +
             "Name: " + name + "\n" +
             "Coordinates: " + coordinates.toString() + "\n" +
             "Creation Date: " + creationDate.toString() + "\n" +
@@ -79,14 +79,18 @@ public class LabWork {
             "Personal Qualities Minimum: " + personalQualitiesMinimum + "\n" +
             "Description: " + description + "\n" +
             "Difficulty: " + difficulty.toString() + "\n" +
-            "Author: \n" + getPersonString(author);
+            "Author: \n" + author.getTabString(1);
     }
-    public String getPersonString(Person person) {
-    String[] s = person.toString().split("\n");
-    StringBuilder sb = new StringBuilder();
-    for (String line : s) {
-        sb.append("\t").append(line).append("\n");
+    public String getTabString(int num) {
+        String[] s = this.toString().split("\n");
+        for(int i = 0; i < num; i++) {
+            for(int j = 0; j < s.length; j++) {
+                s[j] = "\t" + s[j];
+            }
+        }
+        for(int j = 0; j < s.length; j++) {
+            s[j] = s[j] + "\n";
+        }
+        return String.join("", s);
     }
-    return sb.toString();
-}
 }

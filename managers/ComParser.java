@@ -9,14 +9,14 @@ public class ComParser {
         commands.put("add", new AddCom(collectionManager));
         commands.put("clear", new ClearCom(collectionManager));
         commands.put("counterByWeight", new CountGreaterThanAuthorCom(collectionManager));
-        commands.put("executeScript", new ExecuteScriptCom(collectionManager));
+        commands.put("execute", new ExecuteScriptCom(collectionManager));
         commands.put("exit", new ExitCom(collectionManager));
         commands.put("filterStartsWithDescription", new FilterStartsWithDescriptionCom(collectionManager));
         commands.put("help", new HelpCom(collectionManager));
         commands.put("history", new HistoryCom(collectionManager));
         commands.put("info", new InfoCom(collectionManager));
         commands.put("remove", new RemoveByIdCom(collectionManager));
-        //commands.put("save", new SaveCom(collectionManager));
+        commands.put("save", new SaveCom(collectionManager));
         commands.put("show", new ShowCom(collectionManager));
         commands.put("update", new UpdateCom(collectionManager));
 

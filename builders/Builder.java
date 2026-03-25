@@ -63,37 +63,42 @@ public class Builder {
     }*/
 
     public <T> T interactInputRetry(Function<String[], T> action, String[] params, String s) throws WrongParam, WrongAction {
-        try {
-            return action.apply(params);
-        } catch (WrongParam e) {
-            System.out.println(e.getMessage());
-            if(InputFile.readFile == false)  {
-                String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"yes\" \n" +
-                                    //"\tЕсли хотите начать создание всей лабораторной работы сначала введите: \"no\" \n" +
-                                    "\tЕсли хотите выйти из создания лабораторной введите \"back\"");
-                while (prov == null) {
-                    prov = Input.getParams("\tВведите: \"yes\", \"no\" или \"back\"");
-                }
-                if (prov.equals("yes")) {
-                    return interactInputRetry(action, null, s); // повторить попытку
-                }/*else if (prov.equals("no")) {
-                    throw e; // начать заново (поднимаем исключение)
-                } */else {
-                    throw new WrongAction(); // выйти
-                }
-            } else {
-                System.out.println("\tВведены не все параметры или они некорректно заданы, хотите ввести их ещё раз в интерактивном режиме? \n" );
-                String prov = null;
-                while (prov == null) {
-                    prov = Input.getParams("\tВведите: \"yes\" или \"no\" \n");
-                }
-                if (prov.equals("yes")) {
-                    return interactInputRetry(action, Input.getParams(s).split(" "), s); // повторить попытку
+        //while(true) {
+                try {
+                return action.apply(params);
+            } catch (WrongParam e) {
+                System.out.println(e.getMessage());
+                if(InputFile.readFile == false)  {
+                    String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"(y)yes\" \n" );
+                                        //"\tЕсли хотите начать создание всей лабораторной работы сначала введите: \"no\" \n" +
+                                        //"\tЕсли хотите выйти из создания лабораторной введите \"(b)back\"");
+                    while (prov == null) {
+                        prov = Input.getParams("\tВведите: \"(y)yes\" или \"back\"");//\"no\" 
+                    }
+                    if (prov.equals("yes") || prov.equals("y")) {
+                        return interactInputRetry(action, null, s); // повторить попытку
+                    }/* else if (prov.equals("no")) {
+                        throw e; // начать заново (поднимаем исключение)
+                    } */else {
+                        throw new WrongAction(); // выйти
+                    }
                 } else {
-                    throw new WrongAction(); // выйти
+                    System.out.println("\tВведены не все параметры или они некорректно заданы, хотите ввести их ещё раз в интерактивном режиме? \n" );
+                    String prov = null;
+                    while (prov == null) {
+                        prov = Input.getParams("\tВведите: \"(y)yes\" или \"(n)no\" \n");
+                    }
+                    if (prov.equals("yes") || prov.equals("y")) {
+                        return interactInputRetry(action, Input.getParams(s).split(" "), s); // повторить попытку
+                        //params = Input.getParams(s).split(" "); // повторить попытку
+                        //continue;
+                    } else {
+                        throw new WrongAction(); // выйти
+                    }
                 }
+                
             }
-            
-        }
+        //}
+        
     }
 }

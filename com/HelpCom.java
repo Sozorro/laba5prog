@@ -3,6 +3,7 @@ package com;
 import managers.CollectionManager;
 import managers.ComHistory;
 import managers.ComParser;
+import exceptions.*;;
 
 public class HelpCom extends Command {
     public HelpCom(CollectionManager collectionManager) {
@@ -12,11 +13,22 @@ public class HelpCom extends Command {
     }
     @Override
     public void execute(String... args) {
-        ComParser pars = new ComParser(collectionManager);
-        ComHistory.addCom(name, null);
-        System.out.println("Список доступных команд: ");
-        for(Command com : pars.getCommands().values()) {
-            System.out.printf("%s: %s %n", com.getName(), com.getDescription());
+        try{
+            if(args == null || args.length != 0) {
+                throw new WrongParam("Неверный ввод");
+            }
+            for(String s : args) {
+                System.out.println("--0" + s + "\n");
+            }
+            ComParser pars = new ComParser(collectionManager);
+            ComHistory.addCom(name, null);
+            System.out.println("Список доступных команд: ");
+            for(Command com : pars.getCommands().values()) {
+                System.out.printf("%s: %s %n", com.getName(), com.getDescription());
+            }
+        }  catch (WrongParam e) {
+            System.out.println("Ошибка ввода.");
         }
+        
     }
 }

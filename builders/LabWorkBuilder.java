@@ -2,6 +2,7 @@ package builders;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.function.Function;
 
 import enums.Difficulty;
 import exceptions.WrongAction;
@@ -38,12 +39,12 @@ public class LabWorkBuilder extends Builder {
         }
     }
 
-    public LabWork makeLabWork(String date, String name, String coordinates, String minimalPoint, String personalQualitiesMinimum,
+    public LabWork makeLabWork(String date, String name, String coordinatesX, String coordinatesY, String minimalPoint, String personalQualitiesMinimum,
         String description, String difficulty, String... author) { //проверка всех полей
         return new LabWork(
             makeDate(date),
             makeName(name),
-            makeCoordinates(coordinates), 
+            makeCoordinates(coordinatesX, coordinatesY), 
             makeMinimalPoint(minimalPoint), 
             makePersonalQualitiesMinimum(personalQualitiesMinimum), 
             makeDescription(description),
@@ -100,7 +101,6 @@ public class LabWorkBuilder extends Builder {
         /*if ((args == null || args.length == 0) && InputFile.readFile == false) {
             return makeName(Input.getParams(s).split(" "));
         }*/
-
         String result = interactInputRetry((params) -> {
             if (params != null && params.length != 0) {
                 String input = String.join("", params).toString().trim();
@@ -113,6 +113,9 @@ public class LabWorkBuilder extends Builder {
                 throw new WrongParam(ext);
             } else {
                 //throw new WrongParam(ext);
+                //params = Input.getParams(s).split(" ");
+                //return;
+                //continue;
                 return makeName(Input.getParams(s).split(" "));
             }
         }, args, s);
@@ -129,6 +132,14 @@ public class LabWorkBuilder extends Builder {
                 try {
                     coords[0] = params[0];
                     coords[1] = params[1];
+                    boolean b = true;
+                    try {
+                        Integer.valueOf(coords[0]);
+                        b = true;
+                        
+                    } catch (NumberFormatException e) {
+                        b = false;
+                    }
                     Coordinates coord = new Coordinates(Float.valueOf(coords[0]), Float.valueOf(coords[1]));
                     if (Validator.validCoordinatesForLabWork(coord)) {
                         return coord;
@@ -247,7 +258,6 @@ public class LabWorkBuilder extends Builder {
                     int i = Integer.parseInt(args[0]);
                     input = Difficulty.getVal(i);
                 } catch (NumberFormatException notNum) {
-                    System.out.println(ext);
                     try {
                         input = Difficulty.valueOf(args[0]);
                     } catch (IllegalArgumentException notZnach) {

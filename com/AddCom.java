@@ -28,9 +28,9 @@ public class AddCom extends Command {
                 System.out.println("\tВведены не все параметры или они некорректно заданы, хотите ввести их ещё раз в интерактивном режиме? \n" );
                 String prov = null;
                 while (prov == null) {
-                    prov = Input.getParams("\tВведите: \"yes\" или \"no\" \n");
+                    prov = Input.getParams("\tВведите: \"(y)yes\" или \"(n)no\" \n");
                 }
-                if (prov.equals("yes")) {
+                if (prov.equals("yes") || prov.equals("y")) {
                     laba = labWorkBuilder.makeLabWork();
                 } else {
                     System.out.println("Комнда была пропущена");

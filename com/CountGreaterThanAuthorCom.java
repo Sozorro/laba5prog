@@ -26,11 +26,11 @@ public class CountGreaterThanAuthorCom extends Command {
                 if(InputFile.readFile == false) str = Input.getParams("введите вес").split(" ");
                 else {
                     System.out.println("Не введены параметры, необходимые для выполнения команды, хотите ввести их в интерактивном режиме?");
-                    String prov = Input.getParams("\tВведите: \"yes\" \n \tИли: \"no\" и тогда команда будет пропущена");
+                    String prov = Input.getParams("\tВведите: \"(y)yes\" \n \tИли: \"no\" и тогда команда будет пропущена");
                     while(prov == null) {
-                        prov = Input.getParams("\tВведите: \"yes\" \n \tИли: \"no\" и тогда команда будет пропущена");
+                        prov = Input.getParams("\tВведите: \"(y)yes\" \n \tИли: \"no\" и тогда команда будет пропущена");
                     }
-                    if(prov.equals("yes")) {
+                    if(prov.equals("yes") || prov.equals("y")) {
                         str = Input.getParams("введите вес").split(" ");
                     }//
                     System.out.println("Комнда была пропущена");
@@ -50,8 +50,8 @@ public class CountGreaterThanAuthorCom extends Command {
             System.out.println("Неверный формат веса");
         } catch (WrongParam e) {
             System.out.println(e.getMessage());
-            String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"yes\" \n \tИначе введите: \"no\" \n \t");
-            if(prov != null && prov.equals("yes")) {
+            String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"(y)yes\" \n \tИначе введите: \"(n)no\" \n \t");
+            if(prov != null && (prov.equals("yes") || prov.equals("y"))) {
                 execute();
             }
         }

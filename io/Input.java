@@ -3,6 +3,7 @@ package io;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import exceptions.WrongParam;
 import managers.CollectionManager;
 import managers.ComParser;
 
@@ -15,6 +16,7 @@ public class Input {
         while (true) {
             try {
                 System.out.println("----------------------");
+                System.out.println("Ведите команду. Для справки введите: help");
                 String s = readNextLine();
                 if (s == null) continue;
                 String[] command = s.split(" ", 2);
@@ -23,18 +25,27 @@ public class Input {
                 else comParser.interpret(command[0], command[1]);
             } catch (NoSuchElementException e) { //if end file(ctrl+D)
                 scannerNow = new Scanner(System.in);
+            } catch (WrongParam e) { //if end file(ctrl+D)
+                System.out.println(e.getMessage());
+                scannerNow = new Scanner(System.in);
             }
         }
     }
-    private static String readNextLine(){ 
-        String s = scannerNow.nextLine().trim();
-        while (s.equals("") || s == null) {
-            s = scannerNow.nextLine().trim();
+    private static String readNextLine() throws WrongParam { 
+        try {
+            String s = scannerNow.nextLine().trim();
+            while (s.equals("") || s == null) {
+                System.out.println("ожидание строки");
+                s = scannerNow.nextLine().trim();
+            }
+            return s;
+        } catch (NoSuchElementException e) { //if end file(ctrl+D)
+            throw new WrongParam("Недопустимые символы для ввода");
         }
-        return s;
+        
     }
 
-    public static String getParams(String s, String... args){ 
+    public static String getParams(String s, String... args) throws WrongParam { 
         System.out.println(s);
         for(String arg : args) {
             System.out.println(arg);

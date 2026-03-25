@@ -29,9 +29,9 @@ public class FilterStartsWithDescriptionCom extends Command {
             System.out.println(e.getMessage());
             String prov = null;
             while (prov == null) {
-                prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"yes\" \n \tИначе введите: \"no\" \n \t");
+                prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"(y)yes\" \n \tИначе введите: \"(n)no\" \n \t");
             }
-            if(prov.equals("yes")) {
+            if(prov.equals("yes") || prov.equals("y")) {
                 execute(Input.getParams("Введите подстроку: "));
             } else {
                 System.out.println("Комнда была пропущена");

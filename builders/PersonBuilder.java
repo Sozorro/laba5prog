@@ -144,7 +144,6 @@ public class PersonBuilder extends Builder {
                     int i = Integer.parseInt(args[0]);
                     input = Color.getVal(i);
                 } catch (NumberFormatException notNum) {
-                    System.out.println(ext);
                     try {
                         input = Color.valueOf(args[0]);
                     } catch (IllegalArgumentException notZnach) {

@@ -2,7 +2,6 @@ package builders;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.function.Function;
 
 import enums.Difficulty;
 import exceptions.WrongAction;
@@ -132,14 +131,6 @@ public class LabWorkBuilder extends Builder {
                 try {
                     coords[0] = params[0];
                     coords[1] = params[1];
-                    boolean b = true;
-                    try {
-                        Integer.valueOf(coords[0]);
-                        b = true;
-                        
-                    } catch (NumberFormatException e) {
-                        b = false;
-                    }
                     Coordinates coord = new Coordinates(Float.valueOf(coords[0]), Float.valueOf(coords[1]));
                     if (Validator.validCoordinatesForLabWork(coord)) {
                         return coord;
@@ -279,8 +270,6 @@ public class LabWorkBuilder extends Builder {
 
 
     public Person makePerson(String... args) throws WrongParam, WrongAction {
-        String s = "Введите author";
-        String ext = "Некорректное pyfxtybt";
 
         PersonBuilder personBuilder = new PersonBuilder();
         Person person = null;

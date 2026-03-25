@@ -1,7 +1,5 @@
 package com;
 
-import builders.LabWork;
-import builders.LabWorkBuilder;
 import builders.Person;
 import builders.PersonBuilder;
 import enums.Color;

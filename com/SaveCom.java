@@ -1,18 +1,14 @@
 package com;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.TreeSet;
 
 import builders.LabWork;
 import exceptions.WrongParam;
 import io.Input;
-import io.InputFile;
 import managers.CollectionManager;
 import managers.ComHistory;
 

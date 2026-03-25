@@ -16,7 +16,7 @@ public class ComParser {
         commands.put("history", new HistoryCom(collectionManager));
         commands.put("info", new InfoCom(collectionManager));
         commands.put("remove", new RemoveByIdCom(collectionManager));
-        commands.put("save", new SaveCom(collectionManager));
+        //commands.put("save", new SaveCom(collectionManager));
         commands.put("show", new ShowCom(collectionManager));
         commands.put("update", new UpdateCom(collectionManager));
 

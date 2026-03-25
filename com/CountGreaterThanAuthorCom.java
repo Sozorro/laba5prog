@@ -1,10 +1,14 @@
 package com;
 
+import builders.LabWork;
+import builders.LabWorkBuilder;
 import builders.Person;
 import builders.PersonBuilder;
 import enums.Color;
+import exceptions.WrongAction;
 import exceptions.WrongParam;
 import io.Input;
+import io.InputFile;
 import managers.CollectionManager;
 import managers.ComHistory;
 
@@ -18,7 +22,21 @@ public class CountGreaterThanAuthorCom extends Command {
     public void execute(String... args) {
         try {
             String[] str;
-            if(args == null) str = Input.getParams("введите вес").split(" ");
+            if(args == null) {
+                if(InputFile.readFile == false) str = Input.getParams("введите вес").split(" ");
+                else {
+                    System.out.println("Не введены параметры, необходимые для выполнения команды, хотите ввести их в интерактивном режиме?");
+                    String prov = Input.getParams("\tВведите: \"yes\" \n \tИли: \"no\" и тогда команда будет пропущена");
+                    while(prov == null) {
+                        prov = Input.getParams("\tВведите: \"yes\" \n \tИли: \"no\" и тогда команда будет пропущена");
+                    }
+                    if(prov.equals("yes")) {
+                        str = Input.getParams("введите вес").split(" ");
+                    }//
+                    System.out.println("Комнда была пропущена");
+                    throw new WrongAction();
+                }
+            }
             else str = args;
             String ext = "Неверный формат, проверьте корректность ввода";
             if(str.length > 1 || str.length == 0) {

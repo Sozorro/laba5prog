@@ -27,6 +27,17 @@ public class PersonBuilder extends Builder {
             return makePerson();
         }
     }
+
+    public Person makePerson(String name, String height, String weight, String passportID, String hairColor) {
+        return new Person(
+            makeName(name),
+            makeHeight(height),
+            makeWeight(weight),
+            makePassportID(passportID),
+            makeHairColor(hairColor)
+
+        );
+    }
     public Person makePerson(String name, double height, long weight, String passportID, Color hairColor) {
         return new Person (name, height, weight, passportID, hairColor);
     }
@@ -36,7 +47,7 @@ public class PersonBuilder extends Builder {
         String ext = "Недопустимое название, проверьте корректность ввода";
 
         String result = interactInputRetry((params) -> {
-            if (params != null) {
+            if (params != null && params.length != 0) {
                 String input = String.join("", params).toString().trim();
                 if (Validator.validNameForLabWork(input)) {
                     return input;
@@ -53,7 +64,7 @@ public class PersonBuilder extends Builder {
     }
 
     public double makeHeight(String... args) throws WrongParam, WrongAction {
-        String s = "Введите рост (в метрах): ";
+        String s = "Введите рост: ";
         String ext = "Некорректный рост";
 
         return interactInputRetry((params) -> {
@@ -68,7 +79,7 @@ public class PersonBuilder extends Builder {
                 } catch (NumberFormatException e) {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null || InputFile.readFile == true) {
+            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
                 return makeHeight(Input.getParams(s).split(" "));
@@ -77,7 +88,7 @@ public class PersonBuilder extends Builder {
     }
 
     public long makeWeight(String... args) throws WrongParam, WrongAction {
-        String s = "Введите вес (в килограммах): ";
+        String s = "Введите вес: ";
         String ext = "Некорректный вес";
 
         return interactInputRetry((params) -> {
@@ -92,7 +103,7 @@ public class PersonBuilder extends Builder {
                 } catch (NumberFormatException e) {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null || InputFile.readFile == true) {
+            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
                 return makeWeight(Input.getParams(s).split(" "));
@@ -105,7 +116,7 @@ public class PersonBuilder extends Builder {
         String ext = "Некорректный номер паспорта";
 
         String result = interactInputRetry((params) -> {
-            if (params != null) {
+            if (params != null && params.length != 0) {
                 String input = String.join("", params).toString().trim();
                 if (Validator.validPassportIDForPerson(input)) {
                     return input;
@@ -145,7 +156,7 @@ public class PersonBuilder extends Builder {
                 } else {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null || InputFile.readFile == true) {
+            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
                 return makeHairColor(Input.getParams(s).split(" "));

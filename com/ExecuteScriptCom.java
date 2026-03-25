@@ -1,6 +1,7 @@
 package com;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import exceptions.WrongParam;
 import io.Input;
@@ -22,6 +23,12 @@ public class ExecuteScriptCom extends Command {
             if(args.length != 1) throw new WrongParam("Неверное имя файла, проверьте корректность ввода и отсутствие пробелов в названии");
             File myFile = new File(args[0]);
             InputFile.start(myFile, collectionManager);
+        } catch (FileNotFoundException e) {
+            System.out.println("Данный файл не найден");
+            String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"yes\" \n \tИначе введите: \"no\" \n \t");
+            if(prov != null && prov.equals("yes")) {
+                execute();
+            }
         } catch (WrongParam e) {
             System.out.println(e.getMessage());
             String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"yes\" \n \tИначе введите: \"no\" \n \t");

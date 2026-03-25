@@ -69,16 +69,16 @@ public class Builder {
             System.out.println(e.getMessage());
             if(InputFile.readFile == false)  {
                 String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"yes\" \n" +
-                                    "\tЕсли хотите начать создание всей лабораторной работы сначала введите: \"no\" \n" +
-                                    "\tЕсли хотите совсем выйти из создания лабораторной введите \"back\"");
+                                    //"\tЕсли хотите начать создание всей лабораторной работы сначала введите: \"no\" \n" +
+                                    "\tЕсли хотите выйти из создания лабораторной введите \"back\"");
                 while (prov == null) {
                     prov = Input.getParams("\tВведите: \"yes\", \"no\" или \"back\"");
                 }
                 if (prov.equals("yes")) {
                     return interactInputRetry(action, null, s); // повторить попытку
-                } else if (prov.equals("no")) {
+                }/*else if (prov.equals("no")) {
                     throw e; // начать заново (поднимаем исключение)
-                } else {
+                } */else {
                     throw new WrongAction(); // выйти
                 }
             } else {

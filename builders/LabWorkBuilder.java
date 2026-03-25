@@ -2,10 +2,7 @@ package builders;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
-import enums.Color;
 import enums.Difficulty;
 import exceptions.WrongAction;
 import exceptions.WrongParam;
@@ -16,7 +13,7 @@ import managers.Validator;
 
 public class LabWorkBuilder extends Builder {
 
-    public LabWork makeLabWork() throws ParseException, WrongParam, WrongAction { // интерактивный ввод всех полей, кроме времени
+    public LabWork makeLabWork() throws ParseException, WrongAction { // интерактивный ввод всех полей, кроме времени
         try {
             return new LabWork(
                 new java.util.Date(),
@@ -86,7 +83,7 @@ public class LabWorkBuilder extends Builder {
                 } catch (ParseException e) {
                     throw new WrongParam("Ошибка парсинга, проверьте корректность ввода");
                 }
-            } else if (params != null || InputFile.readFile == true) {
+            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
                 return makeDate(Input.getParams(s).split(" "));
@@ -95,12 +92,17 @@ public class LabWorkBuilder extends Builder {
         return date;
     }
 
-    public String makeName(String... name) throws WrongParam, WrongAction {
+    public String makeName(String... args) throws WrongParam, WrongAction {
         String s = "Введите название лабораторной: ";
         String ext = "Недопустимое название, проверьте корректность ввода";
+        
+
+        /*if ((args == null || args.length == 0) && InputFile.readFile == false) {
+            return makeName(Input.getParams(s).split(" "));
+        }*/
 
         String result = interactInputRetry((params) -> {
-            if (params != null) {
+            if (params != null && params.length != 0) {
                 String input = String.join("", params).toString().trim();
                 if (Validator.validNameForLabWork(input)) {
                     return input;
@@ -110,9 +112,10 @@ public class LabWorkBuilder extends Builder {
             } else if (InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
+                //throw new WrongParam(ext);
                 return makeName(Input.getParams(s).split(" "));
             }
-        }, name, s);
+        }, args, s);
         return result;
     }
 
@@ -123,15 +126,20 @@ public class LabWorkBuilder extends Builder {
         Coordinates result = interactInputRetry((params) -> {
             String[] coords = new String[2];
             if (params != null && params.length == 2) {
-                coords[0] = params[0];
-                coords[1] = params[1];
-                Coordinates coord = new Coordinates(Float.valueOf(coords[0]), Float.valueOf(coords[1]));
-                if (Validator.validCoordinatesForLabWork(coord)) {
-                    return coord;
-                } else {
+                try {
+                    coords[0] = params[0];
+                    coords[1] = params[1];
+                    Coordinates coord = new Coordinates(Float.valueOf(coords[0]), Float.valueOf(coords[1]));
+                    if (Validator.validCoordinatesForLabWork(coord)) {
+                        return coord;
+                    } else {
+                        throw new WrongParam(ext);
+                    }
+                } catch (NumberFormatException e) {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null || InputFile.readFile == true) {
+                
+            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
                 String[] str = Input.getParams(s).split(" ");
@@ -174,7 +182,7 @@ public class LabWorkBuilder extends Builder {
                 } catch (NumberFormatException e) {
                     throw new WrongParam(ext);
                 } 
-            } else if (params != null || InputFile.readFile == true) {
+            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
                 return makeMinimalPoint(Input.getParams(s).split(" "));
@@ -188,13 +196,17 @@ public class LabWorkBuilder extends Builder {
 
         return interactInputRetry((params) -> {
             if (params != null && params.length == 1) {
-                Integer input = Integer.valueOf(params[0]);
-                if (Validator.validPersonalQualitiesMinimumForLabWork(input)) {
-                    return input;
-                } else {
+                try {
+                    Integer input = Integer.valueOf(params[0]);
+                    if (Validator.validPersonalQualitiesMinimumForLabWork(input)) {
+                        return input;
+                    } else {
+                        throw new WrongParam(ext);
+                    }
+                } catch (NumberFormatException e) {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null || InputFile.readFile == true) {
+            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
                 return makePersonalQualitiesMinimum(Input.getParams(s).split(" "));
@@ -207,7 +219,7 @@ public class LabWorkBuilder extends Builder {
         String ext = "Некорректное описание";
 
         return interactInputRetry((params) -> {
-            if (params != null) {
+            if (params != null && params.length != 0) {
                 String input = String.join("", params).toString().trim();
                 if (Validator.validDescriptionForLabWork(input)) {
                     return input;
@@ -247,7 +259,7 @@ public class LabWorkBuilder extends Builder {
                 } else {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null || InputFile.readFile == true) {
+            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
                 throw new WrongParam(ext);
             } else {
                 return makeDifficulty(Input.getParams(s).split(" "));

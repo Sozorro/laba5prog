@@ -3,7 +3,6 @@ package com;
 import builders.LabWork;
 import builders.LabWorkBuilder;
 import exceptions.WrongAction;
-import exceptions.WrongParam;
 import io.Input;
 import io.InputFile;
 import managers.CollectionManager;

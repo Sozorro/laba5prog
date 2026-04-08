@@ -76,56 +76,11 @@ public class InputFile {
             return Arrays.copyOfRange(args, 14,  16);
         } else if (name_command.equals("filterStartsWithDescription")) {
             return Arrays.copyOfRange(args, 15,  17);
-        }  else { // if (name_command.equals("clear") || name_command.equals("exit") || name_command.equals("help") || name_command.equals("show" || name_command.equals("save")) {
+        }  else { // if (name_command.equals("clear") || name_command.equals("exit") || name_command.equals("help") || name_command.equals("show") || name_command.equals("save")) {
             return null;
         }  
-
-        /*else if(s[0].equals("Person")) {
-            if(s[1].equals("name")) return command[10];
-            else if(s[1].equals("height")) return command[11];
-            else if(s[1].equals("weight")) return command[12];
-            else if(s[1].equals("passportID")) return command[13];
-            else if(s[1].equals("hairColor")) return command[14];
-        }
-        else if(s[0].equals("LabWork")) {
-            if(s[1].equals("date")) return command[2];
-            else if(s[1].equals("name")) return command[3];
-            else if(s[1].equals("coordinatesX")) return command[4];
-            else if(s[1].equals("coordinatesY")) return command[5];
-            else if(s[1].equals("minimalPoint")) return command[6];
-            else if(s[1].equals("personalQualitiesMinimum")) return command[7];
-            else if(s[1].equals("description")) return command[8];
-            else if(s[1].equals("difficulty")) return command[9];
-            else if(s[1].equals("person")) return getParams("Person", s[2]);//2-14
-        }
-        return null;*/
     }
 
-
-    /*public static String getParams(String... s){
-        if(s[0].equals("Id")) {
-            return command[1];
-        }
-        else if(s[0].equals("Person")) {
-            if(s[1].equals("name")) return command[10];
-            else if(s[1].equals("height")) return command[11];
-            else if(s[1].equals("weight")) return command[12];
-            else if(s[1].equals("passportID")) return command[13];
-            else if(s[1].equals("hairColor")) return command[14];
-        }
-        else if(s[0].equals("LabWork")) {
-            if(s[1].equals("date")) return command[2];
-            else if(s[1].equals("name")) return command[3];
-            else if(s[1].equals("coordinatesX")) return command[4];
-            else if(s[1].equals("coordinatesY")) return command[5];
-            else if(s[1].equals("minimalPoint")) return command[6];
-            else if(s[1].equals("personalQualitiesMinimum")) return command[7];
-            else if(s[1].equals("description")) return command[8];
-            else if(s[1].equals("difficulty")) return command[9];
-            else if(s[1].equals("person")) return getParams("Person", s[2]);//2-14
-        }
-        return null;
-    }*/
     // id, LabWork(date, name, coordinatesX, coordinatesY, minimalPoint, personalQualitiesMinimum, description, difficulty, Person(name, height, weight, passportID, hairColor))
     /*
     Должно быть:

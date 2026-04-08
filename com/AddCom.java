@@ -1,7 +1,5 @@
 package com;
 
-import java.text.ParseException;
-
 import builders.LabWork;
 import builders.LabWorkBuilder;
 import exceptions.WrongAction;
@@ -42,16 +40,16 @@ public class AddCom extends Command {
             ComHistory.addCom(name, laba.toString());
 
             //java.util.Date date, String name, Coordinates coordinates, int minimalPoint, int personalQualitiesMinimum,
-        //String description, Difficulty difficulty, Person author
-//date, name, coordinatesX, coordinatesY, minimalPoint, personalQualitiesMinimum, description, difficulty, Person(name, height, weight, passportID, hairColor
+            //String description, Difficulty difficulty, Person author
+            //date, name, coordinatesX, coordinatesY, minimalPoint, personalQualitiesMinimum, description, difficulty, Person(name, height, weight, passportID, hairColor
         
-        } catch (ParseException e) {
-            System.out.println("Ошибка парсинга, элемент не был добавлен");
-        } catch (WrongParam e) {
-            System.out.println("Ошибка ввода. Элемент не был добавлен");
-        } catch (WrongAction e) {
+        } //catch (WrongParam e) {
+         //   System.out.println("Ошибка ввода. Элемент не был добавлен");
+        //} 
+        catch (WrongAction e) {
             System.out.println("Создание элемента было остановлено и он не был добавлен в коллекцию");
+        } catch (Exception e) {
+            System.out.println("Произошла непредвиденная ошибка. Создание элемента было остановлено и он не был добавлен в коллекцию");
         }
     }
-    /*передача параметров через конструкторы? */
 }

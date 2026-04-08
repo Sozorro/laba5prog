@@ -51,8 +51,6 @@ public class UpdateCom extends Command {
             collectionManager.updateLab(Long.parseLong(str[0]), laba);
             ComHistory.addCom(name, "Id обновлённого элемента: " + str[0] + "\nНовый элемент: \n" + laba.getTabString(1));
             
-        } catch (ParseException e) {
-            System.out.println("Ошибка парсинга, элемент не был обновлён");
         } catch (NumberFormatException e) {
             System.out.println("Неверный формат id");
         } catch (WrongParam e) {

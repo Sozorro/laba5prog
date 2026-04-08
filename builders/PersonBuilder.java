@@ -3,40 +3,42 @@ package builders;
 import enums.Color;
 import exceptions.WrongAction;
 import exceptions.WrongParam;
-import io.Input;
 import io.InputFile;
 import managers.Validator;
 
 public class PersonBuilder extends Builder {
-    public Person makePerson() {
-        try {
-            return new Person (
+    public Person makePerson() throws WrongParam, WrongAction {
+        while (true) {
+            try {
+                return new Person (
                 makeName(),
                 makeHeight(),
                 makeWeight(),
                 makePassportID(),
                 makeHairColor()
-                /*
-                getStandartValue("name", String.class), 
-                getStandartValue("height", Double.class), 
-                getStandartValue("weight", Long.class), 
-                getStandartValue("passportID", String.class), 
-                makeColor("hairColor")*/
-            );
-        } catch (WrongParam e) {
-            return makePerson();
+                );
+            } catch (WrongParam | WrongAction e) {
+                throw e;
+            }
         }
     }
 
-    public Person makePerson(String name, String height, String weight, String passportID, String hairColor) {
-        return new Person(
-            makeName(name),
-            makeHeight(height),
-            makeWeight(weight),
-            makePassportID(passportID),
-            makeHairColor(hairColor)
-
-        );
+    public Person makePerson(String name, String height, String weight, String passportID, String hairColor) throws WrongAction {
+        while (true) {
+            try {
+                return new Person(
+                    makeName(name),
+                    makeHeight(height),
+                    makeWeight(weight),
+                    makePassportID(passportID),
+                    makeHairColor(hairColor)
+                );
+            } catch (WrongParam e) {
+                return makePerson();
+            } catch (WrongAction e) {
+                throw e;
+            }
+        }
     }
     public Person makePerson(String name, double height, long weight, String passportID, Color hairColor) {
         return new Person (name, height, weight, passportID, hairColor);
@@ -46,6 +48,10 @@ public class PersonBuilder extends Builder {
         String s = "Введите имя: ";
         String ext = "Недопустимое название, проверьте корректность ввода";
 
+        if ((args == null || args.length == 0) && InputFile.readFile == false) {
+            args = DEFAULT_GETPAR.apply(s);
+        }
+
         String result = interactInputRetry((params) -> {
             if (params != null && params.length != 0) {
                 String input = String.join("", params).toString().trim();
@@ -54,18 +60,20 @@ public class PersonBuilder extends Builder {
                 } else {
                     throw new WrongParam(ext);
                 }
-            } else if (InputFile.readFile == true) {
-                throw new WrongParam(ext);
             } else {
-                return makeName(Input.getParams(s).split(" "));
-            }
-        }, args, s);
+                throw new WrongParam(ext);
+            } 
+        }, DEFAULT_GETPAR, args, s);
         return result;
     }
 
     public double makeHeight(String... args) throws WrongParam, WrongAction {
         String s = "Введите рост: ";
         String ext = "Некорректный рост";
+
+        if ((args == null || args.length == 0) && InputFile.readFile == false) {
+            args = DEFAULT_GETPAR.apply(s);
+        }
 
         return interactInputRetry((params) -> {
             if (params != null && params.length == 1) {
@@ -79,17 +87,19 @@ public class PersonBuilder extends Builder {
                 } catch (NumberFormatException e) {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
-                throw new WrongParam(ext);
             } else {
-                return makeHeight(Input.getParams(s).split(" "));
+                throw new WrongParam(ext);
             }
-        }, args, s);
+        }, DEFAULT_GETPAR, args, s);
     }
 
     public long makeWeight(String... args) throws WrongParam, WrongAction {
         String s = "Введите вес: ";
         String ext = "Некорректный вес";
+
+        if ((args == null || args.length == 0) && InputFile.readFile == false) {
+            args = DEFAULT_GETPAR.apply(s);
+        }
 
         return interactInputRetry((params) -> {
             if (params != null && params.length == 1) {
@@ -103,17 +113,19 @@ public class PersonBuilder extends Builder {
                 } catch (NumberFormatException e) {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
-                throw new WrongParam(ext);
             } else {
-                return makeWeight(Input.getParams(s).split(" "));
+                throw new WrongParam(ext);
             }
-        }, args, s);
+        }, DEFAULT_GETPAR, args, s);
     }
 
     public String makePassportID(String... args) throws WrongParam, WrongAction {
         String s = "Введите номер паспорта: ";
         String ext = "Некорректный номер паспорта";
+
+        if ((args == null || args.length == 0) && InputFile.readFile == false) {
+            args = DEFAULT_GETPAR.apply(s);
+        }
 
         String result = interactInputRetry((params) -> {
             if (params != null && params.length != 0) {
@@ -123,12 +135,10 @@ public class PersonBuilder extends Builder {
                 } else {
                     throw new WrongParam(ext);
                 }
-            } else if (InputFile.readFile == true) {
-                throw new WrongParam(ext);
             } else {
-                return makeName(Input.getParams(s).split(" "));
+                throw new WrongParam(ext);
             }
-        }, args, s);
+        }, DEFAULT_GETPAR, args, s);
         return result;
     }
 
@@ -137,15 +147,19 @@ public class PersonBuilder extends Builder {
                     "\t Доступные значения: \n \t 1. YELLOW \n \t 2. ORANGE \n \t 3. WHITE");
         String ext = "Некорректный цвет, проверьте корректность ввода";
 
+        if ((args == null || args.length == 0) && InputFile.readFile == false) {
+            args = DEFAULT_GETPAR.apply(s);
+        }
+
         return interactInputRetry((params) -> {
             if (params != null && params.length == 1) {
                 Color input = null;
                 try {
-                    int i = Integer.parseInt(args[0]);
+                    int i = Integer.parseInt(params[0]);
                     input = Color.getVal(i);
                 } catch (NumberFormatException notNum) {
                     try {
-                        input = Color.valueOf(args[0]);
+                        input = Color.valueOf(params[0]);
                     } catch (IllegalArgumentException notZnach) {
                         throw new WrongParam(ext);
                     }
@@ -155,63 +169,9 @@ public class PersonBuilder extends Builder {
                 } else {
                     throw new WrongParam(ext);
                 }
-            } else if (params != null && params.length != 0 || InputFile.readFile == true) {
-                throw new WrongParam(ext);
             } else {
-                return makeHairColor(Input.getParams(s).split(" "));
-            }
-        }, args, s);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*private Color makeColor(String s) {
-        // вывод текста и получение Color
-        String str = Input.getParams(s, "\n \t Доступные значения: \n \t 1. YELLOW \n \t 2. ORANGE \n \t 3. WHITE");
-        String ext = "Несуществующий цвет, проверьте корректность ввода";
-        try {
-            if(str == null || str.isEmpty()){
                 throw new WrongParam(ext);
             }
-            try {
-                int i = Integer.parseInt(str);
-                return Color.getVal(i);
-            } catch (NumberFormatException notNum) {
-                System.out.println(ext);
-                try {
-                    Color color = Color.valueOf(str);
-                    return color;
-                } catch (IllegalArgumentException notZnach) {
-                    throw new WrongParam(ext);
-                }
-            }
-            
-        } catch (WrongParam e) {
-            e.getMessage();
-            String prov = Input.getParams("\tЕсли хотите попробовать ещё раз введите: \"yes\" \n \tЕсли хотите начать создание Person сначала введите: \"no\" \n \t tЕсли хотите выйти из создания Person введите \"back\"");
-            if(prov != null && prov.equals("yes")) {
-                return makeColor(s);
-            }
-            if(prov != null && prov.equals("back")) {
-                throw new WrongAction();
-            }
-            throw e;
-        }
-    }*/
+        }, DEFAULT_GETPAR, args, s);
+    }
 }

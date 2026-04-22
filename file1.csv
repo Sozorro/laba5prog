@@ -1,0 +1,4 @@
+﻿name;id; date; name; coordinatesX; coordinatesY; minimalPoint; personalQualitiesMinimum; description; difficulty;name; height; weight; passportID; hairColor;intparam;stringparam
+help;;;;;;;;;;;;;;;;
+add;;12.03.2000;first;3;4;5;6;[p;HARD;fgvhbj;9;8;7;2;;
+show;;;;;;;;;;;;;;;;

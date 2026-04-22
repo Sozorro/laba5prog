@@ -25,10 +25,21 @@ public class SaveCom extends Command {
             if(args == null || args.length == 0) str = Input.getParams("В файл вы хотите записать коллекцию?");
             else if(args.length != 1) throw new WrongParam("Неверное имя файла, проверьте корректность ввода и отсутствие пробелов в названии");
             else str = args[0];
-            if(!str.substring(str.length() - 4).equals(".csv")) {
-                str +=  ".csv";
+            String[] rash = str.split("\\.");
+            if(rash.length > 2 || rash.length == 0) {
+                System.out.println("Неверное имя файла");                
+            } else if(rash.length == 1) {
+                System.out.println("Расширение не указано");
+                System.out.println("Создание файла " + str + ".csv");
+                str = str + ".csv";
+            } else {
+                System.out.println("Расширение файла - " + rash[1]);
+                if(!rash[1].equals("csv")) {
+                    str = str.replace(rash[1], "csv");
+                    System.out.println("Создание файла " + str);
+                } 
             }
-
+            
             try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(str), "UTF-8")) {
                 TreeSet<LabWork> collection = collectionManager.getElems();
                 //CsvSaver.saveCollection(collection, writer);
